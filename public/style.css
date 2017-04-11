@@ -4,7 +4,13 @@
 #index h3{
     margin-left: 50px;
 }
-.software{
+.os, .lang, .ip{
     position: relative;
     left: 20px;
+}
+.descr{
+    color: red;
+}
+.content{
+    color: green;
 }
