@@ -4,7 +4,7 @@
 #index h3{
     margin-left: 50px;
 }
-.os, .lang, .ip{
+.serv-os, .lang, .ip, .my-os{
     position: relative;
     left: 20px;
 }

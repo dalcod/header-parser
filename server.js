@@ -15,7 +15,7 @@ app.use(express.static(__dirname + "/public"));
 app.get("/", function(req, res){
    res.render("index"); 
 });
-app.get("/:lang", function(req, res){
+app.get("/:lang_os", function(req, res){
     var opSys = "";
     var obj = {};
     var winVer = [
@@ -65,10 +65,15 @@ app.get("/:lang", function(req, res){
     } else {
         opSys = os.type() + " " + os.release() + " " + os.arch(); 
     }
+    var param = req.params.lang_os.split("_");
+    var lang = param[0];
+    var myOS = param[1];
+    console.log(param, lang, myOS);
     res.json({
-        lang: req.params.lang,
+        lang: lang,
         ip: ip.address(),
-        opSys: opSys
+        servOpSys: opSys,
+        myOpSys: myOS
     });
 });
 
