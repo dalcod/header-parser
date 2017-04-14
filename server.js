@@ -1,6 +1,7 @@
 var express = require("express");
 var os = require("os");
 var ip = require("ip");
+var uaParser = require("ua-parser-js");
 var app = express();
 var port = process.env.PORT || 8080;
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -13,9 +14,12 @@ app.set("view engine", "ejs");
 
 app.use(express.static(__dirname + "/public"));
 app.get("/", function(req, res){
-   res.render("index"); 
+    res.render("index");
 });
-app.get("/:lang_os", function(req, res){
+
+app.get("/:lang", function(req, res){
+    var ua = uaParser(req.headers['user-agent']);
+    console.log(ua);
     var opSys = "";
     var obj = {};
     var winVer = [
@@ -65,10 +69,8 @@ app.get("/:lang_os", function(req, res){
     } else {
         opSys = os.type() + " " + os.release() + " " + os.arch(); 
     }
-    var param = req.params.lang_os.split("_");
-    var lang = param[0];
-    var myOS = param[1];
-    console.log(param, lang, myOS);
+    var myOS = ua.device.type + ", " + ua.os.name + ua.os.version + " " + ua.cpu.architecture;
+    var lang = req.params.lang;
     res.json({
         lang: lang,
         ip: ip.address(),

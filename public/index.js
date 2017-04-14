@@ -1,5 +1,6 @@
 $(function(){
     var lang = window.navigator.language;
+    /*
     var winVer = window.navigator.userAgent;
     var os = "unknown";
     var osVer = [
@@ -35,8 +36,9 @@ $(function(){
             os = elem.s;
         }
     });
+    */
     var req = $.ajax({
-        url: "/" + lang + "_" + os,
+        url: "/" + lang,
         dataType: "json"
     });
     req.done(function(data){
